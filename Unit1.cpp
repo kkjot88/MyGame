@@ -23,13 +23,25 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::BallRenderTimer(TObject *Sender)
 {
-        Ball->Left += x;
-        Ball->Top += y;
+        Ball->Left += -x;
+        Ball->Top += -y;
 
-        if ((Ball->Left) <= Background->Left) {
+
+        if ((Ball->Left <= (PaddleLP->Left + PaddleLP->Width)) &&
+           (Ball->Top >= (PaddleLP->Top - (Ball->Height / 2))) &&
+           (
+           (Ball->Top + (Ball->Height / 2)) <= (PaddleLP->Top + PaddleLP->Height))
+           )
+        {
                 x = -x;
-                //ScoreRP++;
         }
+
+
+
+        //else if ((Ball->Left) <= Background->Left) {
+        //      x = -x;
+                //ScoreRP++;
+        //}
 
         if ((Ball->Top) <= Background->Top) {
                 y = -y;
@@ -43,28 +55,36 @@ void __fastcall TForm1::BallRenderTimer(TObject *Sender)
         if ((Ball->Top + Ball->Height) >= Background->Height) {
                 y = -y;
         }
+
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::UpLPTimer(TObject *Sender)
 {
-        if (PaddleLP->Top == 0) UpLP->Enabled = false;
-        PaddleLP->Top -= 10;
+        if (PaddleLP->Top > 5) PaddleLP->Top -= 5;
+        TopPosLP->Caption = PaddleLP->Top;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::DownLPTimer(TObject *Sender)
 {
-        if ((PaddleLP->Top + PaddleLP->Height) != Background->Height)
-                PaddleLP->Top += 10;
+        if ((PaddleLP->Top + PaddleLP->Height) < (Background->Height - 5))
+                PaddleLP->Top += 5;
+
+        TopPosLP->Caption = PaddleLP->Top;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::UpRPTimer(TObject *Sender)
 {
-        PaddleRP->Top -= 10;
+        if (PaddleRP->Top > 5) PaddleRP->Top -= 5;
+        TopPosRP->Caption = PaddleRP->Top;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::DownRPTimer(TObject *Sender)
 {
-        PaddleRP->Top += 10;
+        if ((PaddleRP->Top + PaddleRP->Height) < (Background->Height - 5))
+                PaddleRP->Top += 5;
+
+        TopPosRP->Caption = PaddleRP->Top;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
@@ -87,5 +107,6 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         if (Key == VK_DOWN)     DownRP->Enabled = false;
 }
 //---------------------------------------------------------------------------
+
 
 

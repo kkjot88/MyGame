@@ -1,9 +1,8 @@
 object Form1: TForm1
-  Left = 1965
-  Top = 244
+  Left = 454
+  Top = 263
   Anchors = [akLeft, akTop, akRight, akBottom]
-  AutoSize = True
-  BorderStyle = bsNone
+  BorderStyle = bsDialog
   Caption = 'Form1'
   ClientHeight = 600
   ClientWidth = 1000
@@ -23,11 +22,12 @@ object Form1: TForm1
     Top = 0
     Width = 1000
     Height = 600
+    Align = alClient
     Brush.Color = clSilver
   end
   object Ball: TImage
     Left = 336
-    Top = 424
+    Top = 304
     Width = 32
     Height = 32
     AutoSize = True
@@ -134,8 +134,8 @@ object Form1: TForm1
     Transparent = True
   end
   object PaddleLP: TImage
-    Left = 5
-    Top = 242
+    Left = 4
+    Top = 250
     Width = 20
     Height = 100
     AutoSize = True
@@ -333,8 +333,8 @@ object Form1: TForm1
     Transparent = True
   end
   object PaddleRP: TImage
-    Left = 975
-    Top = 242
+    Left = 976
+    Top = 250
     Width = 20
     Height = 100
     AutoSize = True
@@ -531,36 +531,62 @@ object Form1: TForm1
       17291E17291E17291E17291E17291EFFFFFF}
     Transparent = True
   end
+  object TopPosLP: TLabel
+    Left = 104
+    Top = 488
+    Width = 150
+    Height = 37
+    Caption = 'TopPosLP'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object TopPosRP: TLabel
+    Left = 784
+    Top = 488
+    Width = 154
+    Height = 37
+    Caption = 'TopPosRP'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
   object BallRender: TTimer
-    Interval = 15
+    Interval = 8
     OnTimer = BallRenderTimer
     Left = 32
     Top = 32
   end
   object UpLP: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = UpLPTimer
     Left = 32
     Top = 72
   end
   object DownLP: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = DownLPTimer
     Left = 72
     Top = 72
   end
   object UpRP: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = UpRPTimer
     Left = 32
     Top = 112
   end
   object DownRP: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = DownRPTimer
     Left = 72
     Top = 112

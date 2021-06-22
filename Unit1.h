@@ -22,6 +22,8 @@ __published:	// IDE-managed Components
         TTimer *DownLP;
         TTimer *UpRP;
         TTimer *DownRP;
+        TLabel *TopPosLP;
+        TLabel *TopPosRP;
         void __fastcall BallRenderTimer(TObject *Sender);
         void __fastcall DownRPTimer(TObject *Sender);
         void __fastcall UpLPTimer(TObject *Sender);
