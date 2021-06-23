@@ -1,12 +1,14 @@
 object Form1: TForm1
-  Left = 454
-  Top = 263
+  Left = 2364
+  Top = 242
   Anchors = [akLeft, akTop, akRight, akBottom]
   BorderStyle = bsDialog
   Caption = 'Form1'
   ClientHeight = 600
   ClientWidth = 1000
   Color = clBtnFace
+  UseDockManager = True
+  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -26,8 +28,8 @@ object Form1: TForm1
     Brush.Color = clSilver
   end
   object Ball: TImage
-    Left = 336
-    Top = 304
+    Left = 484
+    Top = 284
     Width = 32
     Height = 32
     AutoSize = True
@@ -550,6 +552,19 @@ object Form1: TForm1
     Width = 154
     Height = 37
     Caption = 'TopPosRP'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object LeftPosBall: TLabel
+    Left = 432
+    Top = 488
+    Width = 161
+    Height = 37
+    Caption = 'LeftPosBall'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -32

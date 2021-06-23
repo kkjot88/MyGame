@@ -9,8 +9,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-        int x = -8;
-        int y = -8;
+        int x = -2;
+        int y = -2;
         int ScoreLP = 0;
         int ScoreRP = 0;
 
@@ -26,37 +26,51 @@ void __fastcall TForm1::BallRenderTimer(TObject *Sender)
         Ball->Left += -x;
         Ball->Top += -y;
 
+        //Handling left side
 
         if ((Ball->Left <= (PaddleLP->Left + PaddleLP->Width)) &&
            (Ball->Top >= (PaddleLP->Top - (Ball->Height / 2))) &&
-           (
-           (Ball->Top + (Ball->Height / 2)) <= (PaddleLP->Top + PaddleLP->Height))
+           ((Ball->Top + (Ball->Height / 2)) <= (PaddleLP->Top + PaddleLP->Height)))
+        {
+                x = -x;
+        }
+        else if (Ball->Left <= Background->Left - Ball->Width)
+        {
+                Ball->Left = Background->Left + (Background->Width / 2) - (Ball->Width / 2);
+                Ball->Top = Background->Top + (Background->Height / 2) - (Ball->Height / 2);
+                x = -x;
+        }
+
+        //Handlig right side
+
+        if (
+           ((Ball->Left + Ball->Width) >= PaddleRP->Left)
+           &&
+           (Ball->Top >= (PaddleRP->Top - (Ball->Height / 2))) &&
+           ((Ball->Top + (Ball->Height / 2)) <= (PaddleRP->Top + PaddleRP->Height))
            )
         {
                 x = -x;
         }
+        else if (Ball->Left >= (Background->Left + Background->Width))
+        {
+                Ball->Left = Background->Left + (Background->Width / 2) - (Ball->Width / 2);
+                Ball->Top = Background->Top + (Background->Height / 2) - (Ball->Height / 2);
+                x = -x;
+                sleep(700);
+        }
 
-
-
-        //else if ((Ball->Left) <= Background->Left) {
-        //      x = -x;
-                //ScoreRP++;
-        //}
+        //Handling top and bottom
 
         if ((Ball->Top) <= Background->Top) {
                 y = -y;
-        }
-
-        if ((Ball->Left + Ball->Width) >= Background->Width) {
-                x = -x;
-                //ScoreLP++;
         }
 
         if ((Ball->Top + Ball->Height) >= Background->Height) {
                 y = -y;
         }
 
-
+        LeftPosBall->Caption = Ball->Left;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::UpLPTimer(TObject *Sender)
@@ -107,6 +121,9 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         if (Key == VK_DOWN)     DownRP->Enabled = false;
 }
 //---------------------------------------------------------------------------
+
+
+
 
 
 
