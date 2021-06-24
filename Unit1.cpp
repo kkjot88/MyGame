@@ -9,10 +9,10 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-        int x = -2;
-        int y = -2;
+        int x = -4;
+        int y = -4;
         int ScoreLP = 0;
-        int ScoreRP = 0;
+        int ScoreRP = 0;      
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -23,15 +23,20 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::BallRenderTimer(TObject *Sender)
 {
-        Ball->Left += -x;
-        Ball->Top += -y;
+        BallRender->Interval = 8;
+        Ball->Left += x;
+        Ball->Top += y;
+
+        
+        //dodac odbicie od gory paletki i dolu zeby wygladalo poprawnie i nie wpadala w rezonans + corner shot
 
         //Handling left side
 
         if ((Ball->Left <= (PaddleLP->Left + PaddleLP->Width)) &&
-           (Ball->Top >= (PaddleLP->Top - (Ball->Height / 2))) &&
-           ((Ball->Top + (Ball->Height / 2)) <= (PaddleLP->Top + PaddleLP->Height)))
+           (Ball->Top == (PaddleLP->Top - (Ball->Height / 2))) && //previous >=
+           ((Ball->Top + (Ball->Height / 2)) == (PaddleLP->Top + PaddleLP->Height))) //previous <=
         {
+                Ball->Left = PaddleLP->Left + PaddleLP->Width;
                 x = -x;
         }
         else if (Ball->Left <= Background->Left - Ball->Width)
@@ -46,8 +51,8 @@ void __fastcall TForm1::BallRenderTimer(TObject *Sender)
         if (
            ((Ball->Left + Ball->Width) >= PaddleRP->Left)
            &&
-           (Ball->Top >= (PaddleRP->Top - (Ball->Height / 2))) &&
-           ((Ball->Top + (Ball->Height / 2)) <= (PaddleRP->Top + PaddleRP->Height))
+           (Ball->Top == (PaddleRP->Top - (Ball->Height / 2))) && //previous >=
+           ((Ball->Top + (Ball->Height / 2)) == (PaddleRP->Top + PaddleRP->Height)) //previous <=
            )
         {
                 x = -x;
@@ -57,9 +62,9 @@ void __fastcall TForm1::BallRenderTimer(TObject *Sender)
                 Ball->Left = Background->Left + (Background->Width / 2) - (Ball->Width / 2);
                 Ball->Top = Background->Top + (Background->Height / 2) - (Ball->Height / 2);
                 x = -x;
-                sleep(700);
+                BallRender->Interval = 3000;
         }
-
+                                                      
         //Handling top and bottom
 
         if ((Ball->Top) <= Background->Top) {
@@ -121,6 +126,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
         if (Key == VK_DOWN)     DownRP->Enabled = false;
 }
 //---------------------------------------------------------------------------
+
 
 
 
